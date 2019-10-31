@@ -124,6 +124,7 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
         # Initial information bottleneck parameter
 
         beta_value = 0.1
+        real_beta = beta_value * 0.005
         # Likelihood
         class_loss = -beta_holder * tf.reduce_mean(tf.reduce_sum(y_post.log_prob(y_ph) + t_post.log_prob(t_ph), axis=1))
 
@@ -162,7 +163,6 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
                                                              x_ph_cont: x_train[:, len(binfeats):], t_ph: t_train,
                                                              y_ph: y_train, beta_holder: np.asarray([[beta_value]])})
 
-
             if epoch % 200 == 0 and epoch > 0:
 
                 # Set the lower bound for I(X,Z)
@@ -174,7 +174,7 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
 
                     entropy = np.mean(np.absolute(np.asarray(h_y)))
                     print("Cost: %.2f, I(X;Z): %.4f, I(Z;(T,Y): %.4f, BETA = %.2f" % (totalloss, np.mean(infoloss),
-                                                        np.absolute(entropy - np.mean(reconloss) / beta_value), beta_value))
+                                                        np.absolute(entropy - np.mean(reconloss) / beta_value), real_beta))
 
                     # save MI(Z;(T,Y))
                     izty.append(np.absolute(entropy - np.mean(reconloss) / beta_value))
@@ -203,10 +203,13 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
                             kc += 1
                     else:
                         # collect mutual information in order to calculate the empirical entropy of Y
+
                         h_y.append((np.mean(reconloss) / beta_value))
 
                 # Increase Beta with step
                 beta_value = beta_value * 1.02
+                # Beta with the same scaling of info loss
+                real_beta = beta_value * 0.005
 
     IOTools.save_to_file((yl_means, yl, xl, izty, ixz, batch, beta_list), path)
     # Plot both scatter and info curve line
@@ -220,4 +223,4 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
     print('Finished!')
 
     print('Maximum Lambda Value: {:.3f}'
-          ''.format(beta_value))
+          ''.format(real_beta))
