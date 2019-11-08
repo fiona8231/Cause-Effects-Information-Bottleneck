@@ -14,7 +14,7 @@ from utils import fullyConnect_net, get_y0_y1
 from argparse import ArgumentParser
 from util.IOTools import IOTools
 from Plot import plot_information_curve_line, plot_information_curve_scatter
-from sklearn.decomposition import PCA
+
 import matplotlib
 matplotlib.use('Agg')
 best_logpvalid = - np.inf
@@ -42,7 +42,7 @@ scores_test = np.zeros((args.reps, 3))
 M = None  # batch size during training
 d = 20  # latent space dimension
 lamba = 1e-4  # weight decay
-nh, h = 10, 200  # number and size of hidden layers
+nh, h = 5, 200  # number and size of hidden layers
 
 for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_valid_test()):
     print('\nReplication {}/{}'.format(i + 1, args.reps))
@@ -120,13 +120,13 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
 
 
         # Info Loss 0.01
-        info_loss = 0.005 * tf.reduce_sum(tf.contrib.distributions.kl_divergence(qz, z))
+        info_loss = tf.reduce_sum(tf.contrib.distributions.kl_divergence(qz, z))
         # Initial information bottleneck parameter
 
-        beta_value = 0.1
-        real_beta = beta_value * 0.005
+        beta_value = 1
+
         # Likelihood
-        class_loss = -beta_holder * tf.reduce_mean(tf.reduce_sum(y_post.log_prob(y_ph) + t_post.log_prob(t_ph), axis=1))
+        class_loss = - beta_holder * tf.reduce_sum(y_post.log_prob(y_ph) + t_post.log_prob(t_ph), axis=1)
 
         # Define Loss Funciton
         total_loss = tf.reduce_mean(class_loss + info_loss)
@@ -150,12 +150,12 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
         h_y = list()
         beta_list = list()
 
-        iteration = 75000
+        iteration = 250000
 
         # ************** Start Training *************
         for epoch in range(iteration):
 
-            batch = np.random.choice(idx, 200)
+            batch = np.random.choice(idx, 100)
             x_train, y_train, t_train = xtr[batch], ytr[batch], ttr[batch]
 
             # sample new batch
@@ -163,18 +163,22 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
                                                              x_ph_cont: x_train[:, len(binfeats):], t_ph: t_train,
                                                              y_ph: y_train, beta_holder: np.asarray([[beta_value]])})
 
-            if epoch % 200 == 0 and epoch > 0:
+            if epoch % 200 == 0 and epoch > 0:  # 50
+
+                print("Iteration: %d, KL div: %0.4f" % (epoch, np.mean(infoloss)))
 
                 # Set the lower bound for I(X,Z)
-                if np.mean(infoloss) > 0.0001:
+                if np.mean(infoloss) > 0.1 and len(h_y) > 0:  # here i would only calc this part if you already got some entropy,
+                    # otherwise this doesnt make sense. that was maybe not optimal in my old implementation
 
                     # save MI(x,z)
                     ixz.append(np.mean(infoloss))
                     beta_list.append(beta_value)
 
                     entropy = np.mean(np.absolute(np.asarray(h_y)))
-                    print("Cost: %.2f, I(X;Z): %.4f, I(Z;(T,Y): %.4f, BETA = %.2f" % (totalloss, np.mean(infoloss),
-                                                        np.absolute(entropy - np.mean(reconloss) / beta_value), real_beta))
+                    print("Cost: %.2f, I(X;Z): %.4f, I(Z;(T,Y)): %.4f, BETA = %.2f" % (totalloss, np.mean(infoloss),
+                                                                                      np.absolute(entropy - np.mean(reconloss) / beta_value),
+                                                                                      beta_value))
 
                     # save MI(Z;(T,Y))
                     izty.append(np.absolute(entropy - np.mean(reconloss) / beta_value))
@@ -201,15 +205,18 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
                             yl_means.append(np.median(mi_t_y[matchings_indices]))
 
                             kc += 1
-                    else:
+
+                else:
+                    if np.mean(infoloss) < 0.1:  # here i would just save the entropy if I(X;Z) is 0. This is also not optimal in my old implementation.
+                        # There it didnt change much because I(X,Z) was 0 in the first epoch in our artificial experiment in the Copula IB paper.
                         # collect mutual information in order to calculate the empirical entropy of Y
+
+                        print("Collect Entropy... KL Div: %0.4f" % np.mean(infoloss))
 
                         h_y.append((np.mean(reconloss) / beta_value))
 
                 # Increase Beta with step
-                beta_value = beta_value * 1.02
-                # Beta with the same scaling of info loss
-                real_beta = beta_value * 0.005
+                beta_value = beta_value * 1.01
 
     IOTools.save_to_file((yl_means, yl, xl, izty, ixz, batch, beta_list), path)
     # Plot both scatter and info curve line
@@ -223,4 +230,4 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
     print('Finished!')
 
     print('Maximum Lambda Value: {:.3f}'
-          ''.format(real_beta))
+          ''.format(beta_value))

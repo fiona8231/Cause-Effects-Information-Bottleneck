@@ -59,5 +59,5 @@ def plot_information_curve_scatter(ixt, iyt):
     # Axis label
     plt.ylabel(r'$I(Z;(T,Y))$')
     plt.xlabel(r'$I(X;Z)$')
-    plt.axis([-1, 8, -0.1, 0.6])
+    #plt.axis([-1, 8, -0.1, 0.6])
     plt.show()

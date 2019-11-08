@@ -89,7 +89,7 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
 
         # *********************** Decoder start from here ***********************
 
-        # p(t|z)   nh, h = 3, 200
+        # p(t|z)   nh, h = 5, 200
         logits = fullyConnect_net(z, [h], [[1, None]], 'pt_z', lamba=lamba, activation=activation)
         t = Bernoulli(logits=logits, dtype=tf.float32)
 
@@ -114,19 +114,18 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
 
         t_post_eval = ed.copy(t, {z: qz.mean(), y: y_ph}, scope='t_post_eval')
 
-        log_valid = tf.reduce_mean(tf.reduce_sum(y_post_eval.log_prob(y_ph) + t_post_eval.log_prob(t_ph), axis=1) +
-                                   tf.reduce_sum(z.log_prob(qz.mean()) - qz.log_prob(qz.mean()), axis=1))
+        log_valid = tf.reduce_mean(tf.reduce_sum(y_post_eval.log_prob(y_ph) + t_post_eval.log_prob(t_ph), axis=1) + tf.reduce_sum(z.log_prob(qz.mean()) - qz.log_prob(qz.mean()), axis=1) )
 
         tf.global_variables_initializer().run()
 
         # Information bottleneck control parameter
-        BETA = 1
+        BETA = 17697.44 #16671.79 #3071.49 #3071.49 # 257.83
 
         # Info Loss
-        info_loss = tf.reduce_sum(tf.reduce_mean(tf.contrib.distributions.kl_divergence(qz, z)))
+        info_loss = tf.reduce_sum(tf.contrib.distributions.kl_divergence(qz, z))
 
         # Log-Likelihood
-        class_loss = -BETA * tf.reduce_mean(tf.reduce_sum(y_post.log_prob(y_ph) + t_post.log_prob(t_ph), axis=1))
+        class_loss = - BETA * tf.reduce_sum(y_post.log_prob(y_ph) + t_post.log_prob(t_ph), axis=1)
 
         # Define Loss Funciton
         total_loss = tf.reduce_mean(class_loss + info_loss)
@@ -169,7 +168,7 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
                     print('Improved Validation Bound, Old: {:0.3f}, New: {:0.3f}'.format(best_logpvalid, logpvalid))
                     best_logpvalid = logpvalid
                     # saving model
-                    saver.save(sess, 'models/model-IHDP')
+                    saver.save(sess, 'models/m6-ihdp')
 
             if epoch % args.print_every == 0:
                 y0, y1 = get_y0_y1(sess, y_post, f0, f1, shape=yalltr.shape, L=1)
@@ -185,7 +184,7 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
                       "ICE_test: {:0.3f}, ACE_test: {:0.3f}, Beta Value: {:0.2f}" .format(epoch + 1, n_epoch, logpvalid,
                                                   score_train[0], score_train[1], score_test[0], score_test[1], BETA))
 
-        saver.restore(sess, 'models/model-IHDP')
+        saver.restore(sess, 'models/m6-ihdp')
         y0, y1 = get_y0_y1(sess, y_post, f0, f1, shape=yalltr.shape, L=100)
         y0, y1 = y0 * ys + ym, y1 * ys + ym
         score = evaluator_train.calc_stats(y1, y0)
