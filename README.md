@@ -8,11 +8,11 @@ Run : `InformationCurve.py`
 
 IHDP experiment
 ---
-Perform CEIB on IHDP dataset:
+Perform CEIB on IHDP dataset:\
 Run : `Main.py`
 
 Requirements
 ---
-- Edward 1.3.5
+- Edward 1.3.5\
 - Tensorflow 1.5.0
 
