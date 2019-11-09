@@ -13,6 +13,6 @@ Run : `Main.py`
 
 Requirements
 ---
-- Edward 1.3.5\
+- Edward 1.3.5
 - Tensorflow 1.5.0
 
