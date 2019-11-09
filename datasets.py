@@ -6,9 +6,9 @@ class IHDP(object):
     def __init__(self, path_data="datasets/IHDP/csv", replications=10):
         self.path_data = path_data
         self.replications = replications
-        # which features are binary
+        # binary inputs
         self.binfeats = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
-        # which features are continuous
+        # continuous inputs
         self.contfeats = [i for i in range(25) if i not in self.binfeats]
 
     def __iter__(self):

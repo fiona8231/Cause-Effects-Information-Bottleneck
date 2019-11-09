@@ -133,29 +133,31 @@
     <session id="2014369388">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="126" />
+          <entry key="project.closed" value="130" />
           <entry key="project.open.time.0" value="11" />
           <entry key="project.open.time.1" value="4" />
           <entry key="project.open.time.13" value="2" />
-          <entry key="project.open.time.3" value="25" />
-          <entry key="project.open.time.4" value="69" />
+          <entry key="project.open.time.3" value="26" />
+          <entry key="project.open.time.4" value="72" />
           <entry key="project.open.time.5" value="13" />
           <entry key="project.open.time.6" value="4" />
           <entry key="project.open.time.7" value="2" />
-          <entry key="project.opened" value="130" />
+          <entry key="project.opened" value="134" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="IBCE_ihdp" value="71" />
           <entry key="dummy" value="38" />
-          <entry key="py" value="5624" />
+          <entry key="md" value="120" />
+          <entry key="py" value="5862" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
+          <entry key="Markdown" value="120" />
           <entry key="PLAIN_TEXT" value="38" />
-          <entry key="Python" value="5695" />
+          <entry key="Python" value="5933" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -163,11 +165,11 @@
           <entry key="checkpoint" value="2" />
           <entry key="csv" value="4" />
           <entry key="jpg" value="2" />
-          <entry key="md" value="2" />
+          <entry key="md" value="4" />
           <entry key="pickle" value="7" />
           <entry key="pkl" value="12" />
           <entry key="pstat" value="1" />
-          <entry key="py" value="141" />
+          <entry key="py" value="150" />
           <entry key="txt" value="2" />
         </counts>
       </usages-collector>
@@ -175,10 +177,10 @@
         <counts>
           <entry key="CSV" value="4" />
           <entry key="Image" value="2" />
-          <entry key="Markdown" value="2" />
+          <entry key="Markdown" value="4" />
           <entry key="PLAIN_TEXT" value="23" />
           <entry key="Profiler Session" value="1" />
-          <entry key="Python" value="141" />
+          <entry key="Python" value="150" />
         </counts>
       </usages-collector>
     </session>
@@ -188,20 +190,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/InformationCurve.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2070">
-              <caret line="138" selection-start-line="138" selection-end-line="138" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="119" selection-start-line="119" selection-end-line="119" />
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor>
+                <caret column="6" selection-start-column="6" selection-end-column="6" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -217,7 +213,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>nzn</find>
       <find>mi_x_t</find>
       <find>itx</find>
       <find>ity</find>
@@ -245,8 +240,9 @@
       <find>yl</find>
       <find>kl</find>
       <find>logpvalid</find>
-      <find>log_valid</find>
       <find>h_y</find>
+      <find>log_valid</find>
+      <find>kc</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -260,25 +256,26 @@
         <option value="$PROJECT_DIR$/t.py" />
         <option value="$PROJECT_DIR$/cevae.py" />
         <option value="$PROJECT_DIR$/Main_inference.py" />
-        <option value="$PROJECT_DIR$/datasets.py" />
         <option value="$PROJECT_DIR$/datasets_Twins.py" />
         <option value="$USER_HOME$/PycharmProjects/CEIB/venv/lib/python2.7/site-packages/edward/util/random_variables.py" />
         <option value="$PROJECT_DIR$/Main1.py" />
         <option value="$USER_HOME$/PycharmProjects/CEIB/venv/lib/python2.7/site-packages/matplotlib/pylab.py" />
         <option value="$PROJECT_DIR$/main1.py" />
         <option value="$PROJECT_DIR$/TEST.py" />
-        <option value="$PROJECT_DIR$/evaluation.py" />
         <option value="$PROJECT_DIR$/utils.py" />
         <option value="$USER_HOME$/PycharmProjects/CEIB/venv/lib/python2.7/site-packages/matplotlib/backends/backend_macosx.py" />
         <option value="$USER_HOME$/PycharmProjects/CEIB/venv/lib/python2.7/site-packages/matplotlib/matplotlibrc.py" />
         <option value="$PROJECT_DIR$/FixedBeta.py" />
         <option value="$PROJECT_DIR$/fixcurve.py" />
-        <option value="$PROJECT_DIR$/Plot.py" />
         <option value="$PROJECT_DIR$/CurveScale.005.py" />
         <option value="$PROJECT_DIR$/CurveScale.001.py" />
         <option value="$PROJECT_DIR$/Maintexting.py" />
-        <option value="$PROJECT_DIR$/InformationCurve.py" />
+        <option value="$PROJECT_DIR$/datasets.py" />
+        <option value="$PROJECT_DIR$/evaluation.py" />
+        <option value="$PROJECT_DIR$/Plot.py" />
         <option value="$PROJECT_DIR$/Main.py" />
+        <option value="$PROJECT_DIR$/InformationCurve.py" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -289,10 +286,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="344" />
-    <option name="y" value="44" />
+    <option name="x" value="7" />
+    <option name="y" value="72" />
     <option name="width" value="1680" />
-    <option name="height" value="850" />
+    <option name="height" value="908" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -317,6 +314,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -343,7 +341,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -351,7 +348,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -618,10 +615,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="343" y="373" width="1680" height="850" extended-state="0" />
+    <frame x="80" y="59" width="1680" height="908" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49510762" visible="true" weight="0.22344323" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49510762" visible="true" weight="0.23321123" />
       <window_info id="Structure" order="1" sideWeight="0.50489235" side_tool="true" weight="0.1990232" />
       <window_info id="Favorites" order="2" sideWeight="0.50489235" side_tool="true" weight="0.1990232" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -630,13 +627,13 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.22163588" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Terminal" order="6" sideWeight="0.4993895" weight="0.2566474" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="6" sideWeight="0.4993895" visible="true" weight="0.25612745" />
       <window_info anchor="bottom" id="TODO" order="7" sideWeight="0.4993895" weight="0.32779098" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.10805861" side_tool="true" weight="0.25622776" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="12" sideWeight="0.89194137" visible="true" weight="0.32189974" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.89194137" weight="0.20955883" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" weight="0.3283237" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -708,18 +705,18 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/datasets/TWINS/twin_pairs_Y_3years_samesex.csv">
+      <provider selected="true" editor-type-id="csv-text-editor" />
+      <provider editor-type-id="text-editor" />
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
-      <provider selected="true" editor-type-id="csv-text-editor" />
-      <provider editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/datasets/IHDP/csv/ihdp_npci_5.csv">
+      <provider selected="true" editor-type-id="csv-text-editor" />
+      <provider editor-type-id="text-editor" />
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
-      <provider selected="true" editor-type-id="csv-text-editor" />
-      <provider editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/datasets/TWINS/covar_desc.txt">
       <provider selected="true" editor-type-id="text-editor">
@@ -741,13 +738,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/datasets/TWINS/twin_pairs_T_3years_samesex.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="-1343" />
       </provider>
       <provider editor-type-id="text-editor" />
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
     </entry>
     <entry file="file://$USER_HOME$/PycharmProjects/CEIB/venv/lib/python2.7/site-packages/tensorflow/python/framework/ops.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -797,14 +794,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/models/pickle6.pkl" />
     <entry file="file://$PROJECT_DIR$/datasets/IHDP/csv/ihdp_npci_3.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
       <provider selected="true" editor-type-id="csv-text-editor" />
       <provider editor-type-id="text-editor">
         <state relative-caret-position="528">
           <caret line="90" column="214" lean-forward="true" selection-start-line="89" selection-start-column="47" selection-end-line="90" selection-end-column="214" />
         </state>
+      </provider>
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/PycharmProjects/CEIB/venv/lib/python2.7/site-packages/numpy/core/_methods.py">
@@ -815,11 +812,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/datasets/IHDP/csv/ihdp_npci_10.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="-10826" />
+      </provider>
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/util/__init__.py">
@@ -829,16 +826,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="11" lean-forward="true" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/datasets.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="43" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="43" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -857,13 +844,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/datasets/IHDP/csv/ihdp_npci_4.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="-10754" />
       </provider>
       <provider editor-type-id="text-editor" />
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
     </entry>
     <entry file="file://$USER_HOME$/PycharmProjects/CEIB/venv/lib/python2.7/site-packages/numpy/lib/function_base.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -874,16 +861,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pickle6.pkl" />
     <entry file="file://$PROJECT_DIR$/main1.py" />
-    <entry file="file://$PROJECT_DIR$/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-80">
-          <caret line="6" column="3" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/PycharmProjects/CEIB/venv/lib/python2.7/site-packages/matplotlib/pyplot.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
@@ -937,33 +914,16 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/FixedBeta.py" />
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="674">
-            <caret line="344" selection-start-line="344" selection-end-line="344" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/datasets/IHDP/csv/ihdp_npci_2.csv">
+      <provider selected="true" editor-type-id="csv-text-editor" />
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
-      <provider selected="true" editor-type-id="csv-text-editor" />
     </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_bundle/pydev_umd.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="507">
           <caret line="196" selection-start-line="196" selection-end-line="196" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Plot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="20" column="17" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -975,35 +935,66 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/evaluation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="25" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pickle.pkl">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/CurveScale.001.py" />
-    <entry file="file://$PROJECT_DIR$/Maintexting.py">
+    <entry file="file://$PROJECT_DIR$/Maintexting.py" />
+    <entry file="file://$PROJECT_DIR$/Plot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="129" selection-start-line="129" selection-end-line="129" />
+        <state relative-caret-position="15">
+          <caret line="19" column="51" selection-start-line="19" selection-start-column="51" selection-end-line="19" selection-end-column="51" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/InformationCurve.py">
+    <entry file="file://$PROJECT_DIR$/datasets.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2070">
-          <caret line="138" selection-start-line="138" selection-end-line="138" />
+        <state relative-caret-position="150">
+          <caret line="10" column="27" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="81" lean-forward="true" selection-start-line="30" selection-start-column="81" selection-end-line="30" selection-end-column="81" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="119" selection-start-line="119" selection-end-line="119" />
+        <state relative-caret-position="2502">
+          <caret line="192" column="76" lean-forward="true" selection-start-line="192" selection-start-column="76" selection-end-line="192" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/InformationCurve.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="190" column="69" selection-start-line="190" selection-start-column="69" selection-end-line="190" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/evaluation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor>
+            <caret column="6" selection-start-column="6" selection-end-column="6" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

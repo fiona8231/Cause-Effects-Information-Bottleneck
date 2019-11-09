@@ -15,11 +15,6 @@ from scipy.stats import sem
 from utils import fullyConnect_net, get_y0_y1
 from argparse import ArgumentParser
 
-
-#config = tf.ConfigProto()
-# Turn on xla optimization
-#config.graph_options.optimizer_options.global_jit_level = tf.OptimizerOptions.ON_1
-#ds = tf.contrib.distributions
 best_logpvalid = - np.inf
 
 parser = ArgumentParser()
@@ -41,7 +36,7 @@ dataset = IHDP(replications=args.reps)
 scores = np.zeros((args.reps, 3))
 scores_test = np.zeros((args.reps, 3))
 
-M = None  # batch size during training
+M = None
 d = 20  # latent space dimension
 lamba = 1e-4  # weight decay
 nh, h = 5, 200  # number and size of hidden layers
@@ -53,7 +48,7 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
     (xte, tte, yte), (y_cfte, mu0te, mu1te) = test
     evaluator_test = Evaluator(yte, tte, y_cf=y_cfte, mu0=mu0te, mu1=mu1te)
 
-    # reorder features with binary first and continuous after
+    # Reorder features with binary first and continuous after
     perm = binfeats + contfeats
     xtr, xva, xte = xtr[:, perm], xva[:, perm], xte[:, perm]
 
@@ -74,7 +69,6 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
         np.random.seed(1)
         tf.set_random_seed(1)
 
-        # M = None -> batch size during training
         x_ph_bin = tf.placeholder(tf.float32, [M, len(binfeats)], name='x_bin')  # binary inputs
         x_ph_cont = tf.placeholder(tf.float32, [M, len(contfeats)], name='x_cont')  # continuous inputs
         t_ph = tf.placeholder(tf.float32, [M, 1])
@@ -84,7 +78,7 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
 
         activation = tf.nn.elu
 
-        # p(z) -> Define prior
+        # p(z) -> Define prior  N(0,I)
         z = Normal(loc=tf.zeros([tf.shape(x_ph)[0], d]), scale=tf.ones([tf.shape(x_ph)[0], d]))
 
         # *********************** Decoder start from here ***********************
@@ -119,9 +113,9 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
         tf.global_variables_initializer().run()
 
         # Information bottleneck control parameter
-        BETA = 17697.44 #16671.79 #3071.49 #3071.49 # 257.83
+        BETA = 118383.95 #257.83 #2753.05 #9268.75 #4806.3 #16671.79
 
-        # Info Loss
+        # Latent Loss
         info_loss = tf.reduce_sum(tf.contrib.distributions.kl_divergence(qz, z))
 
         # Log-Likelihood
@@ -164,11 +158,12 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
             if epoch % args.earl == 0 or epoch == (n_epoch - 1):
                 logpvalid = sess.run(log_valid, feed_dict={x_ph_bin: xva[:, 0:len(binfeats)], x_ph_cont: xva[:, len(binfeats):],
                                                            t_ph: tva, y_ph: yva})
+                # Early stopping prevent overfitting
                 if logpvalid >= best_logpvalid:
                     print('Improved Validation Bound, Old: {:0.3f}, New: {:0.3f}'.format(best_logpvalid, logpvalid))
                     best_logpvalid = logpvalid
                     # saving model
-                    saver.save(sess, 'models/m6-ihdp')
+                    saver.save(sess, 'models/ihdp')
 
             if epoch % args.print_every == 0:
                 y0, y1 = get_y0_y1(sess, y_post, f0, f1, shape=yalltr.shape, L=1)
@@ -180,11 +175,11 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
                 y0, y1 = y0 * ys + ym, y1 * ys + ym
                 score_test = evaluator_test.calc_stats(y1, y0)
 
-                print("Epoch: {}/{}, Validation Bound >= {:0.3f}, ICE_train: {:0.3f}, ACE_train: {:0.3f}, " \
-                      "ICE_test: {:0.3f}, ACE_test: {:0.3f}, Beta Value: {:0.2f}" .format(epoch + 1, n_epoch, logpvalid,
+                print("Epoch: {}/{}, Validation Bound >= {:0.3f}, ICE_train: {:0.3f}, ACE_train: {:0.3f}, " 
+                      "ICE_test: {:0.3f}, ACE_test: {:0.3f}, Beta = {:0.2f}" .format(epoch + 1, n_epoch, logpvalid,
                                                   score_train[0], score_train[1], score_test[0], score_test[1], BETA))
 
-        saver.restore(sess, 'models/m6-ihdp')
+        saver.restore(sess, 'models/ihdp')
         y0, y1 = get_y0_y1(sess, y_post, f0, f1, shape=yalltr.shape, L=100)
         y0, y1 = y0 * ys + ym, y1 * ys + ym
         score = evaluator_train.calc_stats(y1, y0)
@@ -195,7 +190,7 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
         score_test = evaluator_test.calc_stats(y1t, y0t)
         scores_test[i, :] = score_test
 
-        print('Replication: {}/{}, Train_ICE: {:0.3f}, Train_ACE: {:0.3f},' \
+        print('Replication: {}/{}, Train_ICE: {:0.3f}, Train_ACE: {:0.3f},' 
               'Test_ICE: {:0.3f}, Test_ACE: {:0.3f} '.format(i + 1, args.reps, score[0], score[1], score_test[0], score_test[1],))
         sess.close()
 

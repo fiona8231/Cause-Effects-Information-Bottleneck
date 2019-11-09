@@ -39,7 +39,7 @@ dataset = IHDP(replications=args.reps)
 scores = np.zeros((args.reps, 3))
 scores_test = np.zeros((args.reps, 3))
 
-M = None  # batch size during training
+M = None
 d = 20  # latent space dimension
 lamba = 1e-4  # weight decay
 nh, h = 5, 200  # number and size of hidden layers
@@ -110,16 +110,11 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
         y_post = ed.copy(y, {z: qz, t: t_ph}, scope='y_post')
         t_post = ed.copy(t, {z: qz, y: y_ph}, scope='t_post')
 
-        # for early stopping according to a validation set
         y_post_eval = ed.copy(y, {z: qz.mean(), y: y_ph, t: t_ph}, scope='y_post_eval')
 
         t_post_eval = ed.copy(t, {z: qz.mean(), y: y_ph}, scope='t_post_eval')
 
-        log_valid = tf.reduce_mean(tf.reduce_sum(y_post_eval.log_prob(y_ph) + t_post_eval.log_prob(t_ph), axis=1) +
-                                   tf.reduce_sum(z.log_prob(qz.mean()) - qz.log_prob(qz.mean()), axis=1))
-
-
-        # Info Loss 0.01
+        # Latent Loss
         info_loss = tf.reduce_sum(tf.contrib.distributions.kl_divergence(qz, z))
         # Initial information bottleneck parameter
 
@@ -159,7 +154,8 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
             x_train, y_train, t_train = xtr[batch], ytr[batch], ttr[batch]
 
             # sample new batch
-            _, totalloss, infoloss, reconloss = sess.run((train_op, total_loss, info_loss, class_loss), feed_dict={x_ph_bin: x_train[:, 0:len(binfeats)],
+            _, totalloss, infoloss, reconloss = sess.run((train_op, total_loss, info_loss, class_loss),
+                                                         feed_dict={x_ph_bin: x_train[:, 0:len(binfeats)],
                                                              x_ph_cont: x_train[:, len(binfeats):], t_ph: t_train,
                                                              y_ph: y_train, beta_holder: np.asarray([[beta_value]])})
 
@@ -168,8 +164,7 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
                 print("Iteration: %d, KL div: %0.4f" % (epoch, np.mean(infoloss)))
 
                 # Set the lower bound for I(X,Z)
-                if np.mean(infoloss) > 0.1 and len(h_y) > 0:  # here i would only calc this part if you already got some entropy,
-                    # otherwise this doesnt make sense. that was maybe not optimal in my old implementation
+                if np.mean(infoloss) > 0.1 and len(h_y) > 0:  # Only calc this part if already got some entropy,
 
                     # save MI(x,z)
                     ixz.append(np.mean(infoloss))
@@ -193,29 +188,27 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
                     yl = list()
                     yl_means = list()
 
-                    kc = 0
-                    # For plotting the information curve mean line
+                    # For plotting the information curve line of mean
                     for k in range(nbins):
                         matchings_indices = [i for i, item in enumerate(mi_x_t) if
                                              item > breaks[k] and item < breaks[k + 1]]
+
                         # if more than 3 MI -> create new bin
                         if len(matchings_indices) > 3:
                             xl.append(np.mean(mi_x_t[matchings_indices]))
                             yl.append(mi_t_y[matchings_indices])
                             yl_means.append(np.median(mi_t_y[matchings_indices]))
 
-                            kc += 1
-
                 else:
-                    if np.mean(infoloss) < 0.1:  # here i would just save the entropy if I(X;Z) is 0. This is also not optimal in my old implementation.
-                        # There it didnt change much because I(X,Z) was 0 in the first epoch in our artificial experiment in the Copula IB paper.
+                    if np.mean(infoloss) < 0.1:  # save the entropy if I(X;Z) is 0.
+
                         # collect mutual information in order to calculate the empirical entropy of Y
 
                         print("Collect Entropy... KL Div: %0.4f" % np.mean(infoloss))
 
                         h_y.append((np.mean(reconloss) / beta_value))
 
-                # Increase Beta with step
+                # Increase Beta
                 beta_value = beta_value * 1.01
 
     IOTools.save_to_file((yl_means, yl, xl, izty, ixz, batch, beta_list), path)
