@@ -220,7 +220,7 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
 
     sess.close()
 
-    print('Finished!')
+    print('************ Finish ************')
 
     print('Maximum Lambda Value: {:.3f}'
           ''.format(beta_value))

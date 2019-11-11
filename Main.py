@@ -113,7 +113,7 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
         tf.global_variables_initializer().run()
 
         # Information bottleneck control parameter
-        BETA = 118383.95 #257.83 #2753.05 #9268.75 #4806.3 #16671.79
+        BETA =16671.79 #257.83 #2753.05 #9268.75 #4806.3 #16671.79
 
         # Latent Loss
         info_loss = tf.reduce_sum(tf.contrib.distributions.kl_divergence(qz, z))
@@ -176,7 +176,7 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
                 score_test = evaluator_test.calc_stats(y1, y0)
 
                 print("Epoch: {}/{}, Validation Bound >= {:0.3f}, ICE_train: {:0.3f}, ACE_train: {:0.3f}, " 
-                      "ICE_test: {:0.3f}, ACE_test: {:0.3f}, Beta = {:0.2f}" .format(epoch + 1, n_epoch, logpvalid,
+                      "ICE_test: {:0.3f}, ACE_test: {:0.3f}, BETA = {:0.2f}" .format(epoch + 1, n_epoch, logpvalid,
                                                   score_train[0], score_train[1], score_test[0], score_test[1], BETA))
 
         saver.restore(sess, 'models/ihdp')
@@ -195,7 +195,7 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
         sess.close()
 
     print('************ Finish ************')
-    print('IBCE Model Total Scores:')
+    print('CEIB Model Total Scores:')
     means, stds = np.mean(scores, axis=0), sem(scores, axis=0)
     print(' Train ACE: {:.3f}+-{:.3f}' ''.format(means[1], stds[1]))
 
