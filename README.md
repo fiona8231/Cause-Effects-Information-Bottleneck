@@ -1,4 +1,4 @@
-# CEIB
+#  The Cause-Effects Information Bottleneck model (CEIB) and the Information Curve based on CEIB
 This repository contains the code for the Cause-Effects Information Bottleneck model (CEIB) and the Information Curve based on CEIB
 
 Information curve experiment
