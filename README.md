@@ -16,3 +16,6 @@ Requirements
 - Edward 1.3.5
 - Tensorflow 1.5.0
 
+Thesis 
+---
+- [Ref Link](https://github.com/fiona8231/Cause-Effects-Information-Bottleneck/blob/master/master_thesis.pdf)
